@@ -192,13 +192,7 @@ h2{font-family:"Instrument Serif",Georgia,serif;font-size:3.25rem;font-weight:40
 .section#experience .row::after{display:block}
 .section#experience .meta{padding:0;border-radius:0;background:none;color:var(--teal);font:500 .68rem var(--mono)}
 .sub{margin:42px 0 14px;color:var(--teal);font:500 .72rem var(--mono);text-transform:uppercase}
-.project-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:18px 0 20px}
-.project-filters{display:flex;flex-wrap:wrap;gap:8px}
-.project-filter{padding:7px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.76rem;font-weight:600;transition:background .2s,color .2s,border-color .2s,transform .2s var(--ease)}
-.project-filter:hover{transform:translateY(-1px);color:var(--accent);border-color:var(--accent)}
-.project-filter[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.project-pill{padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:var(--pill);color:var(--teal);font:500 .7rem var(--mono);text-transform:uppercase;letter-spacing:.04em}
-.project-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.project-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;max-width:48rem}
 .project-card{--project-border-angle:0deg;position:relative;isolation:isolate;display:block;padding:22px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(135deg,rgba(255,255,255,.52),rgba(255,255,255,.18));transition:transform .26s var(--ease),border-color .25s var(--ease),box-shadow .25s var(--ease),background .25s var(--ease)}
 .project-card::before{content:"";position:absolute;inset:-1px;z-index:-1;padding:1px;border-radius:inherit;pointer-events:none;background:conic-gradient(from var(--project-border-angle),transparent 0deg 292deg,color-mix(in srgb,var(--accent) 24%,transparent) 314deg,var(--accent) 344deg,transparent 360deg);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;opacity:.45;animation:project-border-orbit 7s linear infinite;transition:opacity .25s var(--ease)}
 @property --project-border-angle{syntax:"<angle>";inherits:false;initial-value:0deg}
@@ -216,7 +210,6 @@ h2{font-family:"Instrument Serif",Georgia,serif;font-size:3.25rem;font-weight:40
 .project-open{display:inline-flex;align-items:center;gap:8px;margin-top:18px;color:var(--accent);font-size:.8rem;font-weight:700}
 .project-open span{transition:transform .25s var(--ease)}
 .project-card:hover .project-open span{transform:translateX(4px)}
-.project-card[hidden]{display:none}
 .section#contact{position:relative;isolation:isolate;grid-template-columns:minmax(190px,.72fr) minmax(0,1.28fr);align-items:center;gap:clamp(28px,6vw,76px);margin:38px 0 22px;padding:clamp(36px,5vw,68px) clamp(24px,4vw,56px);overflow:hidden;border:1px solid var(--line);border-radius:12px;background:linear-gradient(125deg,rgba(255,255,255,.52),rgba(255,255,255,.28) 60%,rgba(159,205,177,.16));box-shadow:0 18px 54px rgba(32,42,36,.055);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
 :root[data-theme="dark"] .section#contact{background:linear-gradient(125deg,rgba(47,65,53,.86),rgba(36,49,40,.72) 60%,rgba(79,106,82,.35));box-shadow:0 18px 54px rgba(0,0,0,.18)}
 .section#contact::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;background:radial-gradient(340px circle at var(--contact-x,50%) var(--contact-y,50%),rgba(40,107,80,.12),transparent 78%);transition:opacity .35s var(--ease)}
@@ -360,7 +353,7 @@ footer a{color:var(--teal);font-weight:500}
   <section class="hero" id="about">
     <div class="hero-copy">
       <h1 aria-label="Anant Aravind Pillai">Anant<br><span class="title-accent">Pillai</span></h1>
-      <p class="lead">I’m an economics and data science student in Bengaluru. I use data, regression and financial models to answer real economic questions.</p>
+      <p class="lead">I’m an economics and data science student in Bengaluru. I use data and financial models to answer real economic questions.</p>
       <p class="lead muted">I’m looking for internships in investment research, quantitative finance and data analysis.</p>
       <p class="opportunity-status"><span class="opportunity-pulse" aria-hidden="true"></span>Open to internships</p>
       <div class="hero-actions">
@@ -423,72 +416,15 @@ footer a{color:var(--teal);font-weight:500}
   <section class="section" id="projects">
     <header class="section-heading"><span class="section-number">03</span><div><p class="section-label">Projects</p><h2>Hands-on work</h2></div></header>
     <div class="section-content">
-      <div class="project-toolbar">
-        <div class="project-filters" role="group" aria-label="Filter projects">
-          <button class="project-filter" type="button" data-filter="all" aria-pressed="true">All</button>
-          <button class="project-filter" type="button" data-filter="data" aria-pressed="false">Data</button>
-          <button class="project-filter" type="button" data-filter="finance" aria-pressed="false">Finance</button>
-          <button class="project-filter" type="button" data-filter="web" aria-pressed="false">Web</button>
-        </div>
-        <span class="project-pill">5 featured builds</span>
-      </div>
       <div class="project-grid">
-        <a class="project-card" href="project.html?project=market-pulse" data-project="data" aria-label="Open Market Pulse Dashboard project page">
-          <div class="project-metric">Data Story</div>
-          <h3>Market Pulse Dashboard</h3>
-          <p>Built a dashboard that tracks macroeconomic signals, stock sentiment and sector movement using Python and interactive visualisation.</p>
-          <div class="project-tags">
-            <span class="project-tag">Python</span>
-            <span class="project-tag">Pandas</span>
-            <span class="project-tag">Visualization</span>
-          </div>
-          <span class="project-open">Open project <span aria-hidden="true">→</span></span>
-        </a>
-
-        <a class="project-card" href="project.html?project=stress-test" data-project="finance" aria-label="Open Stress Test Simulator project page">
-          <div class="project-metric">Finance Model</div>
-          <h3>Stress Test Simulator</h3>
-          <p>Modeled portfolio sensitivity under variable interest rates, inflation shocks and consumer demand changes for an academic case study.</p>
-          <div class="project-tags">
-            <span class="project-tag">Excel</span>
-            <span class="project-tag">Forecasting</span>
-            <span class="project-tag">Scenario</span>
-          </div>
-          <span class="project-open">Open project <span aria-hidden="true">→</span></span>
-        </a>
-
-        <a class="project-card" href="project.html?project=internship-match" data-project="web" aria-label="Open Campus Internship Match project page">
-          <div class="project-metric">Product Build</div>
-          <h3>Campus Internship Match</h3>
-          <p>Designed a concept product that helps students discover internships based on skill tags, availability and interest fit.</p>
-          <div class="project-tags">
-            <span class="project-tag">UI/UX</span>
-            <span class="project-tag">JavaScript</span>
-            <span class="project-tag">Prototype</span>
-          </div>
-          <span class="project-open">Open project <span aria-hidden="true">→</span></span>
-        </a>
-
-        <a class="project-card" href="project.html?project=economic-trends" data-project="data" aria-label="Open Economic Trend Tracker project page">
-          <div class="project-metric">Research</div>
-          <h3>Economic Trend Tracker</h3>
-          <p>Analyzed public datasets to map the relationship between employment rates, inflation and household consumption patterns.</p>
-          <div class="project-tags">
-            <span class="project-tag">Regression</span>
-            <span class="project-tag">Stats</span>
-            <span class="project-tag">Reporting</span>
-          </div>
-          <span class="project-open">Open project <span aria-hidden="true">→</span></span>
-        </a>
-
-        <a class="project-card" href="https://niftydashboardanant.streamlit.app/" data-project="finance" target="_blank" rel="noopener noreferrer" aria-label="Open Nifty Portfolio Lab live dashboard">
+        <a class="project-card" href="https://niftydashboardanant.streamlit.app/" target="_blank" rel="noopener noreferrer" aria-label="Open Nifty Portfolio Lab live dashboard">
           <div class="project-metric">Live Dashboard</div>
           <h3>Nifty Portfolio Lab</h3>
-          <p>An interactive Streamlit dashboard for exploring Nifty portfolio insights.</p>
+          <p>Analyze Nifty 50 stocks, explore portfolio risk, optimize stock weights, and test strategies with backtests and stress scenarios.</p>
           <div class="project-tags">
-            <span class="project-tag">Nifty</span>
-            <span class="project-tag">Portfolio Analysis</span>
             <span class="project-tag">Streamlit</span>
+            <span class="project-tag">Portfolio Optimization</span>
+            <span class="project-tag">Backtesting</span>
           </div>
           <span class="project-open">Open live dashboard <span aria-hidden="true">→</span></span>
         </a>
@@ -869,19 +805,6 @@ footer a{color:var(--teal);font-weight:500}
       showCopyStatus(copyFallback(email));
     }
   });
-  var projectFilters = Array.prototype.slice.call(document.querySelectorAll(".project-filter"));
-  var projectCards = Array.prototype.slice.call(document.querySelectorAll(".project-card"));
-  projectFilters.forEach(function (filter) {
-    filter.addEventListener("click", function () {
-      var category = filter.getAttribute("data-filter");
-      projectFilters.forEach(function (button) { button.setAttribute("aria-pressed", String(button === filter)); });
-      projectCards.forEach(function (card) {
-        var shouldShow = category === "all" || card.getAttribute("data-project") === category;
-        card.hidden = !shouldShow;
-      });
-    });
-  });
-
 })();
 </script>
 </body>

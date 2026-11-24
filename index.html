@@ -162,8 +162,8 @@ h2{font-family:"Instrument Serif",Georgia,serif;font-size:3.25rem;font-weight:40
 .row{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;padding:23px 4px 23px 0;border-bottom:1px solid var(--line)}
 .row::after{content:"";position:absolute;left:0;bottom:-1px;width:100%;height:2px;background:linear-gradient(90deg,var(--accent),var(--teal));transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
 .row:hover::after{transform:scaleX(1)}
-.row h3,.skill-group h3{font-size:1.08rem;font-weight:600}
-.row p,.skill-group p{margin-top:6px;color:var(--muted);font-size:.92rem;max-width:44rem;line-height:1.6}
+.row h3{font-size:1.08rem;font-weight:600}
+.row p{margin-top:6px;color:var(--muted);font-size:.92rem;max-width:44rem;line-height:1.6}
 .meta{flex-shrink:0;color:var(--teal);font: .72rem var(--mono);padding-top:4px}
 .education-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(190px,.75fr);gap:32px}
 .education-current{padding:22px 0 24px;border-top:2px solid var(--accent);border-bottom:1px solid var(--line)}
@@ -192,14 +192,6 @@ h2{font-family:"Instrument Serif",Georgia,serif;font-size:3.25rem;font-weight:40
 .section#experience .row::after{display:block}
 .section#experience .meta{padding:0;border-radius:0;background:none;color:var(--teal);font:500 .68rem var(--mono)}
 .sub{margin:42px 0 14px;color:var(--teal);font:500 .72rem var(--mono);text-transform:uppercase}
-.skills-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
-.skills-grid.filtered{grid-template-columns:minmax(0,1fr)}
-.skill-group{padding-top:13px;border-top:1px solid var(--line)}
-.skill-filters{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
-.skill-filter{padding:7px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.76rem;font-weight:600;transition:background .2s,color .2s,border-color .2s}
-.skill-filter:hover{border-color:var(--accent);color:var(--accent)}
-.skill-filter[aria-pressed="true"]{border-color:var(--accent);background:var(--accent);color:var(--accent-ink)}
-.skill-group[hidden]{display:none}
 .project-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:18px 0 20px}
 .project-filters{display:flex;flex-wrap:wrap;gap:8px}
 .project-filter{padding:7px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.76rem;font-weight:600;transition:background .2s,color .2s,border-color .2s,transform .2s var(--ease)}
@@ -265,7 +257,6 @@ footer a{color:var(--teal);font-weight:500}
   .hero{grid-template-columns:minmax(0,1fr) minmax(310px,.82fr);gap:28px;padding:42px 0 60px}
   .hero-notes{padding:10px 0}
   .section{grid-template-columns:150px minmax(0,1fr);gap:28px;padding:64px 0}
-  .skills-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .section#contact{grid-template-columns:minmax(150px,.72fr) minmax(0,1.28fr);gap:24px;padding:32px 26px}
   .section#contact h2{font-size:3rem}
 }
@@ -296,7 +287,6 @@ footer a{color:var(--teal);font-weight:500}
   .section#contact .section-heading>div{max-width:none}
   .section#contact h2{font-size:2.8rem}
   .mail{font-size:1.25rem}
-  .skills-grid{grid-template-columns:1fr;gap:16px}
   .contact-tools{gap:12px}
   .back-top{right:18px;bottom:18px}
 }
@@ -354,11 +344,11 @@ footer a{color:var(--teal);font-weight:500}
     <label class="explorer-label" for="explorer-search">Search the portfolio</label>
     <div class="explorer-search-wrap">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
-      <input class="explorer-search" id="explorer-search" type="search" placeholder="Projects, skills, experience..." autocomplete="off" aria-controls="explorer-results">
+      <input class="explorer-search" id="explorer-search" type="search" placeholder="Projects, experience..." autocomplete="off" aria-controls="explorer-results">
       <kbd>/</kbd>
       <button class="explorer-clear" id="explorer-clear" type="button" aria-label="Clear search" title="Clear search" hidden>×</button>
     </div>
-    <p class="explorer-meta" id="explorer-meta" aria-live="polite">Search sections, skills, and projects</p>
+    <p class="explorer-meta" id="explorer-meta" aria-live="polite">Search sections, experience, and projects</p>
     <ul class="explorer-results" id="explorer-results"></ul>
     <p class="explorer-empty" id="explorer-empty" hidden>No matches found. Try another search.</p>
   </div>
@@ -426,18 +416,6 @@ footer a{color:var(--teal);font-weight:500}
         <li class="row"><div><h3>Sales, Snackerly</h3><p>Won more than 200 conversions in Bengaluru with an offline approach that included flea markets.</p></div><span class="meta">2026</span></li>
         <li class="row"><div><h3>Social media marketing, customer support and teaching</h3><p>Earlier roles in social media marketing, customer support.</p></div><span class="meta">Earlier</span></li>
       </ul>
-      <p class="sub">Skills</p>
-      <div class="skill-filters" role="group" aria-label="Filter skills">
-        <button class="skill-filter" type="button" data-filter="all" aria-pressed="true">All</button>
-        <button class="skill-filter" type="button" data-filter="analysis" aria-pressed="false">Analysis</button>
-        <button class="skill-filter" type="button" data-filter="build" aria-pressed="false">Build</button>
-        <button class="skill-filter" type="button" data-filter="business" aria-pressed="false">Business</button>
-      </div>
-      <div class="skills-grid">
-        <div class="skill-group" data-skill="analysis"><h3>Analysis</h3><p>OLS regression, PivotTables, Excel Solver, financial modelling</p></div>
-        <div class="skill-group" data-skill="build"><h3>Build</h3><p>Python, HTML, CSS, JavaScript, Node.js</p></div>
-        <div class="skill-group" data-skill="business"><h3>Business</h3><p>B2B and B2C sales, cold calling, report writing</p></div>
-      </div>
     </div>
   </section>
 
@@ -452,7 +430,7 @@ footer a{color:var(--teal);font-weight:500}
           <button class="project-filter" type="button" data-filter="finance" aria-pressed="false">Finance</button>
           <button class="project-filter" type="button" data-filter="web" aria-pressed="false">Web</button>
         </div>
-        <span class="project-pill">4 featured builds</span>
+        <span class="project-pill">5 featured builds</span>
       </div>
       <div class="project-grid">
         <a class="project-card" href="project.html?project=market-pulse" data-project="data" aria-label="Open Market Pulse Dashboard project page">
@@ -501,6 +479,18 @@ footer a{color:var(--teal);font-weight:500}
             <span class="project-tag">Reporting</span>
           </div>
           <span class="project-open">Open project <span aria-hidden="true">→</span></span>
+        </a>
+
+        <a class="project-card" href="https://niftydashboardanant.streamlit.app/" data-project="finance" target="_blank" rel="noopener noreferrer" aria-label="Open Nifty Portfolio Lab live dashboard">
+          <div class="project-metric">Live Dashboard</div>
+          <h3>Nifty Portfolio Lab</h3>
+          <p>An interactive Streamlit dashboard for exploring Nifty portfolio insights.</p>
+          <div class="project-tags">
+            <span class="project-tag">Nifty</span>
+            <span class="project-tag">Portfolio Analysis</span>
+            <span class="project-tag">Streamlit</span>
+          </div>
+          <span class="project-open">Open live dashboard <span aria-hidden="true">→</span></span>
         </a>
       </div>
     </div>
@@ -599,16 +589,6 @@ footer a{color:var(--teal);font-weight:500}
       searchText: searchableSection.textContent.toLowerCase()
     });
   });
-  document.querySelectorAll(".skill-group").forEach(function (group) {
-    var title = group.querySelector("h3");
-    if (!title) return;
-    explorerEntries.push({
-      title: title.textContent.trim() + " skills",
-      type: "Skills",
-      href: "#experience",
-      searchText: group.textContent.toLowerCase()
-    });
-  });
   document.querySelectorAll(".project-card").forEach(function (card) {
     var title = card.querySelector("h3");
     if (!title) return;
@@ -674,7 +654,7 @@ footer a{color:var(--teal);font-weight:500}
     explorerEmpty.hidden = matches.length > 0;
     explorerMeta.textContent = query
       ? matchingEntries.length + (matchingEntries.length === 1 ? " result" : " results") + (matchingEntries.length > matches.length ? " (showing up to 4)" : "")
-      : "Search projects, skills, and sections";
+      : "Search projects, experience, and sections";
     explorerClear.hidden = !query;
   }
   explorerToggle.addEventListener("click", function () {
@@ -889,20 +869,6 @@ footer a{color:var(--teal);font-weight:500}
       showCopyStatus(copyFallback(email));
     }
   });
-  var skillFilters = Array.prototype.slice.call(document.querySelectorAll(".skill-filter"));
-  var skillGroups = Array.prototype.slice.call(document.querySelectorAll(".skill-group"));
-  var skillGrid = document.querySelector(".skills-grid");
-  skillFilters.forEach(function (filter) {
-    filter.addEventListener("click", function () {
-      var category = filter.getAttribute("data-filter");
-      skillFilters.forEach(function (button) { button.setAttribute("aria-pressed", button === filter); });
-      skillGroups.forEach(function (group) {
-        group.hidden = category !== "all" && group.getAttribute("data-skill") !== category;
-      });
-      skillGrid.classList.toggle("filtered", category !== "all");
-    });
-  });
-
   var projectFilters = Array.prototype.slice.call(document.querySelectorAll(".project-filter"));
   var projectCards = Array.prototype.slice.call(document.querySelectorAll(".project-card"));
   projectFilters.forEach(function (filter) {

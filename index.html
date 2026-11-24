@@ -257,8 +257,8 @@ footer a{color:var(--teal);font-weight:500}
   :root{--pad:22px}
   .top{grid-template-columns:1fr auto;grid-template-areas:"brand theme" "tabs tabs";row-gap:10px;padding-top:12px;padding-bottom:12px}
   .brand{grid-area:brand}.tabs{grid-area:tabs;justify-self:start}.header-tools{grid-area:theme;grid-column:auto;grid-row:auto}
-  .tabs{width:100%;justify-content:space-between;gap:0}
-  .tab{padding:8px 9px;font-size:.7rem}
+  .tabs{width:100%;min-width:0;justify-content:space-between;gap:0}
+  .tab{flex:1 1 0;min-width:0;padding:8px 0;font-size:clamp(.58rem,2.8vw,.68rem);text-align:center;white-space:nowrap}
   .hero{min-height:0;grid-template-columns:1fr;gap:34px;padding:42px 0 58px}
   h1{font-size:4.7rem}
   .lead{margin-top:18px}

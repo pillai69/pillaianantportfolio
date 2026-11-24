@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Nifty Portfolio Lab: an interactive dashboard for Nifty 50 portfolio risk, optimization, backtesting, and stress testing.">
+<title>Nifty Portfolio Lab | Anant Pillai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font:"Manrope",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",monospace;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --pad:clamp(20px,5vw,76px);
+  --text:#202522;--muted:#6b726e;--line:rgba(32,42,36,.13);
+  --pill:rgba(40,107,80,.1);--accent:#286b50;--accent-ink:#fff;
+  --teal:#737b76;--surface:#fff;--header-bg:rgba(255,255,255,.28);
+  --page-bg:#edf3ee;--nav-bg:rgba(255,255,255,.54);
+  color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --text:#e8eee9;--muted:#aab5ae;--line:rgba(232,238,233,.15);
+  --pill:rgba(121,187,148,.16);--accent:#82c69d;--accent-ink:#17231b;
+  --teal:#b2c0b7;--surface:#202b24;--header-bg:rgba(26,36,30,.78);
+  --page-bg:#1a241e;--nav-bg:rgba(34,46,38,.78);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--page-bg);scroll-behavior:smooth}
+body{min-height:100svh;overflow-x:hidden;background:var(--page-bg);color:var(--text);font:400 1rem/1.7 var(--font);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse at 10% 12%,rgba(159,205,177,.25),transparent 38%),radial-gradient(ellipse at 92% 70%,rgba(241,203,163,.16),transparent 38%)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.top{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:18px;max-width:1440px;margin:auto;padding:13px var(--pad);border-bottom:1px solid var(--line);background:var(--header-bg);backdrop-filter:blur(24px) saturate(125%);-webkit-backdrop-filter:blur(24px) saturate(125%)}
+.brand{display:flex;align-items:center;gap:10px;font:500 .7rem var(--mono);letter-spacing:.04em;text-transform:uppercase}
+.brand::before{content:"";width:8px;height:8px;border-radius:1px;background:var(--accent);transform:rotate(45deg)}
+.header-actions,.hero-actions{display:flex;align-items:center;gap:14px}
+.back-link{color:var(--muted);font-size:.82rem;font-weight:600;transition:color .2s}
+.back-link:hover{color:var(--accent)}
+.theme-toggle{display:grid;place-items:center;width:38px;height:38px;border:1px solid var(--line);border-radius:50%;background:var(--nav-bg);color:var(--text)}
+.theme-toggle svg{width:17px;height:17px}
+.theme-toggle .icon-sun{display:none}
+:root[data-theme="dark"] .theme-toggle .icon-moon{display:none}
+:root[data-theme="dark"] .theme-toggle .icon-sun{display:block}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+main{max-width:1080px;margin:auto;padding:clamp(38px,7vw,88px) var(--pad) 80px}
+.eyebrow{color:var(--teal);font:500 .7rem var(--mono);letter-spacing:.04em;text-transform:uppercase}
+.project-hero{max-width:850px;padding-bottom:50px;border-bottom:1px solid var(--line)}
+h1{margin-top:16px;font:400 clamp(3.2rem,8vw,6.6rem)/.95 "Instrument Serif",Georgia,serif;letter-spacing:-.025em}
+.intro{max-width:760px;margin-top:22px;color:var(--muted);font-size:clamp(1rem,1.7vw,1.16rem);line-height:1.75}
+.hero-actions{flex-wrap:wrap;margin-top:28px}
+.button{display:inline-flex;align-items:center;gap:9px;padding:11px 16px;border:1px solid var(--line);border-radius:6px;font-size:.82rem;font-weight:700;transition:transform .2s var(--ease),background .2s,border-color .2s}
+.button:hover{transform:translateY(-2px);border-color:var(--accent)}
+.button-primary{border-color:var(--accent);background:var(--accent);color:var(--accent-ink)}
+.button-primary:hover{background:color-mix(in srgb,var(--accent) 86%,var(--text))}
+.section{padding:42px 0;border-bottom:1px solid var(--line)}
+h2{font:400 clamp(2rem,4vw,3rem)/1.05 "Instrument Serif",Georgia,serif}
+.section-copy{max-width:740px;margin-top:16px;color:var(--muted);font-size:.94rem;line-height:1.75}
+.feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:24px}
+.feature{padding:20px;border:1px solid var(--line);border-radius:12px;background:color-mix(in srgb,var(--surface) 72%,transparent)}
+.feature h3{font-size:.96rem;font-weight:700}
+.feature p{margin-top:8px;color:var(--muted);font-size:.85rem;line-height:1.65}
+.screenshot-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:24px}
+.screenshot{overflow:hidden;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.screenshot img{display:block;width:100%;height:auto}
+.screenshot figcaption{padding:10px 12px;color:var(--muted);font-size:.77rem}
+.disclaimer{margin-top:22px;padding:15px 18px;border-left:2px solid var(--accent);background:var(--pill);color:var(--muted);font-size:.8rem}
+footer{max-width:1440px;margin:auto;padding:18px var(--pad) 28px;border-top:1px solid var(--line);color:var(--muted);font:400 .7rem var(--mono)}
+@media(max-width:600px){
+  :root{--pad:22px}
+  .top{padding-top:11px;padding-bottom:11px}
+  .back-link{font-size:.72rem}
+  .feature-grid{grid-template-columns:1fr}
+  .screenshot-grid{grid-template-columns:1fr}
+  .project-hero{padding-bottom:36px}
+  .section{padding:32px 0}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html#about" aria-label="Portfolio home">Data / Finance</a>
+  <div class="header-actions">
+    <a class="back-link" href="index.html#projects">← All projects</a>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch theme">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15.1Z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+      <span class="sr-only">Toggle color theme</span>
+    </button>
+  </div>
+</header>
+<main>
+  <section class="project-hero">
+    <p class="eyebrow">Portfolio analytics / Streamlit</p>
+    <h1>Nifty Portfolio Lab</h1>
+    <p class="intro">An interactive research dashboard for exploring risk and portfolio strategies across Nifty 50 stocks. Choose a stock set, date range, and maximum weight per stock, then run an analysis and inspect the results.</p>
+    <div class="hero-actions">
+      <a class="button button-primary" href="https://niftydashboardanant.streamlit.app/" target="_blank" rel="noopener noreferrer">Open live dashboard <span aria-hidden="true">↗</span></a>
+      <a class="button" href="index.html#projects">Back to portfolio</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <p class="eyebrow">Overview</p>
+    <h2>From market data to portfolio insights</h2>
+    <p class="section-copy">The dashboard brings historical market data and portfolio analysis into one interactive workspace. It includes an overview of portfolio growth and key risk measures, plus separate views for risk, optimization, backtesting, and stress testing. Users can also compare performance with the Nifty 50 index.</p>
+  </section>
+
+  <section class="section">
+    <p class="eyebrow">Dashboard preview</p>
+    <h2>Explore the interface</h2>
+    <p class="section-copy">A look at the portfolio setup, performance chart, and risk-analysis views.</p>
+    <div class="screenshot-grid">
+      <figure class="screenshot">
+        <img src="images/nifty-portfolio-lab/overview.png" alt="Nifty Portfolio Lab stock selection controls and portfolio overview metrics" loading="lazy" decoding="async">
+        <figcaption>Portfolio setup and overview</figcaption>
+      </figure>
+      <figure class="screenshot">
+        <img src="images/nifty-portfolio-lab/growth-chart.png" alt="Historical growth of ₹100 invested across selected Nifty 50 stocks" loading="lazy" decoding="async">
+        <figcaption>Historical growth comparison</figcaption>
+      </figure>
+      <figure class="screenshot">
+        <img src="images/nifty-portfolio-lab/risk-analysis.png" alt="Risk and return metrics for selected Nifty 50 stocks" loading="lazy" decoding="async">
+        <figcaption>Risk and return analysis</figcaption>
+      </figure>
+      <figure class="screenshot">
+        <img src="images/nifty-portfolio-lab/drawdown.png" alt="Historical drawdown chart for a selected Nifty 50 stock" loading="lazy" decoding="async">
+        <figcaption>Drawdown and correlation analysis</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section">
+    <p class="eyebrow">What you can explore</p>
+    <h2>Analysis tools</h2>
+    <div class="feature-grid">
+      <article class="feature">
+        <h3>Configure a portfolio</h3>
+        <p>Select Nifty 50 stocks, set a historical date range, and choose a maximum weight per stock before running an analysis.</p>
+      </article>
+      <article class="feature">
+        <h3>Review risk and performance</h3>
+        <p>Explore portfolio growth, risk measures, and stock-level comparisons in the dashboard’s overview and risk views.</p>
+      </article>
+      <article class="feature">
+        <h3>Optimize and backtest</h3>
+        <p>Explore portfolio weights and evaluate strategies against historical data, including data not used by the optimizer.</p>
+      </article>
+      <article class="feature">
+        <h3>Stress-test scenarios</h3>
+        <p>Use the stress-test view to examine how portfolio results respond to different scenarios.</p>
+      </article>
+    </div>
+    <p class="disclaimer">Historical results do not predict future performance. This is an educational project, not investment advice. The dashboard identifies Yahoo Finance as its source for daily closing-price data.</p>
+  </section>
+</main>
+<footer>© <span id="year"></span> Anant Pillai</footer>
+<script>
+(function () {
+  var root = document.documentElement;
+  var toggle = document.getElementById("theme-toggle");
+  root.setAttribute("data-theme", localStorage.getItem("portfolio-theme") === "light" ? "light" : "dark");
+  function updateToggle() {
+    var isDark = root.getAttribute("data-theme") === "dark";
+    var label = isDark ? "Switch to light theme" : "Switch to dark theme";
+    toggle.setAttribute("aria-label", label);
+    toggle.setAttribute("title", label);
+  }
+  updateToggle();
+  toggle.addEventListener("click", function () {
+    var nextTheme = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", nextTheme);
+    localStorage.setItem("portfolio-theme", nextTheme);
+    updateToggle();
+  });
+  document.getElementById("year").textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
